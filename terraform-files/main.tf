@@ -7,7 +7,7 @@ resource "aws_instance" "test-server" {
   connection {
     type        = "ssh"
     user       = "ubuntu"
-    private_key = file("./jenkins.pem")  # Adjusted key name
+    private_key = file("./jenkins.pem")
     host       = self.public_ip
   }
 
@@ -20,8 +20,7 @@ resource "aws_instance" "test-server" {
   }
 
   provisioner "local-exec" {
-   command: "ansible-playbook '/var/lib/jenkins/workspace/BANKING PROJECT/terraform-files/ansibleplaybook.yml'"
-
+    command = "ansible-playbook '/var/lib/jenkins/workspace/BANKING_PROJECT/terraform-files/ansibleplaybook.yml'"
   }
 
   tags = {
