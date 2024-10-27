@@ -1,16 +1,33 @@
-- name : Configure Docker on EC2 Instances
-  hosts : all
+- name: Configure Docker on EC2 Instances
+  hosts: all
   become: true
-  connection : ssh
-  tasks : 
-  - name: updating apt
-    command : sudo apt-get update
+  tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
 
-  - name : Install Docker
-    command : sudo  apt-get install docker.io -y
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
 
-  - name : Start Docker Service
-    command : sudo systemctl start docker
+    - name: Start Docker Service
+      systemd:
+        name: docker
+        state: started
+        enabled: true
 
-  - name: Deploy Docker Container
-    command: docker run -itd -p 8084:8081 prakruthi810/banking-project-demo:4.0
+    - name: Pull Docker Image
+      docker_image:
+        name: prakruthi810/banking-project-demo
+        tag: "4.0"
+        source: pull
+
+    - name: Deploy Docker Container
+      docker_container:
+        name: banking_project_demo
+        image: prakruthi810/banking-project-demo:4.0
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "8084:8081"
