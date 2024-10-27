@@ -12,15 +12,16 @@ resource "aws_instance" "test-server" {
   }
 
   provisioner "remote-exec" {
-    inline = ["echo 'wait to start the instance'"]
+    inline = [
+      "while ! nc -z ${self.public_ip} 22; do sleep 5; done",  // Wait for SSH
+    ]
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.test-server.public_ip} > inventory"
-  }
-
-  provisioner "local-exec" {
-    command = "ansible-playbook '/var/lib/jenkins/workspace/BANKING_PROJECT/terraform-files/ansibleplaybook.yml'"
+    command = <<EOT
+      echo ${aws_instance.test-server.public_ip} > inventory
+      ansible-playbook '/var/lib/jenkins/workspace/BANKING_PROJECT/terraform-files/ansibleplaybook.yml'
+    EOT
   }
 
   tags = {
