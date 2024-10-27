@@ -17,6 +17,12 @@
         state: started
         enabled: yes
 
+    - name: Pull Docker Image
+      docker_image:
+        name: shubhamkushwah123/finance-me
+        tag: "4.0"
+        source: pull
+
     - name: Deploy Docker Container
       docker_container:
         name: finance_container
@@ -24,3 +30,4 @@
         state: started
         published_ports:
           - "8084:8081"
+        restart_policy: unless-stopped
