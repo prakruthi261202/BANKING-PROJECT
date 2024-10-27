@@ -20,7 +20,7 @@ resource "aws_instance" "test-server" {
   provisioner "local-exec" {
     command = <<EOT
       echo ${aws_instance.test-server.public_ip} > inventory
-      ansible-playbook '/var/lib/jenkins/workspace/BANKING_PROJECT/terraform-files/ansibleplaybook.yml'
+      ansible-playbook '/var/lib/jenkins/workspace/BANKING PROJECT/terraform/ansibleplaybook.yml'
     EOT
   }
 
