@@ -36,7 +36,7 @@ pipeline {
                 }
        stage('Push-Image') {
            steps {
-               sh 'docker push cbabu85/banking-project-demo:3.0'
+               sh 'docker push prakruthi810/banking-project-demo:3.0'
                      }
                 }
        stage('Config & Deployment') {
