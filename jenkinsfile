@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://https://github.com/prakruthi261202/BANKING-PROJECT.git'
+                git 'https://github.com/prakruthi261202/BANKING-PROJECT.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
