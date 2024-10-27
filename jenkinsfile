@@ -24,7 +24,7 @@ pipeline {
             }
        stage('Create Docker Image') {
            steps {
-               sh 'docker build -t prakruthi810/banking-project-demo:3.0 .'
+               sh 'docker build -t prakruthi810/banking-project-demo:4.0 .'
                     }
                 }
        stage('Docker-Login') {
@@ -36,7 +36,7 @@ pipeline {
                 }
        stage('Push-Image') {
            steps {
-               sh 'docker push prakruthi810/banking-project-demo:3.0'
+               sh 'docker push prakruthi810/banking-project-demo:4.0'
                      }
                 }
        stage('Config & Deployment') {
