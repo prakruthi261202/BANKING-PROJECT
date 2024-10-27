@@ -20,7 +20,7 @@
     - name: Deploy Docker Container
       docker_container:
         name: finance_container
-        image: shubhamkushwah123/finance-me:1.1
+        image: shubhamkushwah123/finance-me:4.0
         state: started
         published_ports:
           - "8084:8081"
