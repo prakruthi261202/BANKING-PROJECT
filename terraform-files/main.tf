@@ -1,12 +1,12 @@
 resource "aws_instance" "test-server" {
-  ami = "ami-06b21ccaeff8cd686"
+  ami = "ami-0866a3c8686eaeeba"
   instance_type = "t2.micro"
-  key_name = "mykey"
-  vpc_security_group_ids = ["sg-04cf4e3801bd09203"]
+  key_name = "jenkins (1)"
+  vpc_security_group_ids = ["sg-0518ca06826b03dc0"]
   connection {
      type = "ssh"
-     user = "ec2-user"
-     private_key = file("./mykey.pem")
+     user = "ubuntu"
+     private_key = file("./jenkins (1).pem")
      host = self.public_ip
      }
   provisioner "remote-exec" {
@@ -19,6 +19,6 @@ resource "aws_instance" "test-server" {
      command = "echo ${aws_instance.test-server.public_ip} > inventory"
      }
   provisioner "local-exec" {
-     command = "ansible-playbook /var/lib/jenkins/workspace/BankingProject/terraform-files/ansibleplaybook.yml"
+     command = "ansible-playbook /var/lib/jenkins/workspace/BANKING PROJECT/terraform-files/ansibleplaybook.yml"
      }
   }
